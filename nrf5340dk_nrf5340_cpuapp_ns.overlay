@@ -22,3 +22,95 @@
         label = "IMU";
     };
 };
+
+// &qspi {
+    //     status = "okay";
+    //     pinctrl-0 = <&qspi_default>;
+    //     pinctrl-1 = <&qspi_sleep>;
+    //     pinctrl-names = "default", "sleep";
+    //     /delete-node/ mx25r6435f@0;
+    //     can: can@0 {
+        //         compatible = "nordic,qspi-nor";
+        //         reg = <0>;
+        //         label = "CAN";
+        //         jedec-id = <0xe3 0x00>;
+        //         sck-frequency = <8000000>;
+    //     };
+// };
+// &spi4 {
+    //     status = "okay";
+    //     compatible = "nordic,nrf-spim";
+    //     pinctrl-0 = <&spi4_default>;
+    //     pinctrl-1 = <&spi4_sleep>;
+    //     pinctrl-names = "default", "sleep";
+    //     cs-gpios = <&gpio0 14 GPIO_ACTIVE_LOW>; /* D10 */
+    //     can: mcp2515@0 {
+        //         status = "okay";
+        //         compatible = "micro";
+        //         reg = <0>;
+        //         spi-max-frequency = <24000000>;
+        //         /* Wi-Fi Pins used */
+        //         iovdd-ctrl-gpios = <&gpio0 18 GPIO_ACTIVE_HIGH>;
+        //         bucken-gpios = <&gpio0 5 GPIO_ACTIVE_HIGH>;
+        //         host-irq-gpios = <&gpio0 19 GPIO_ACTIVE_HIGH>;
+    //     };
+// };
+&arduino_spi {
+    can: mcp2515@0 {
+        compatible = "microchip,mcp2515";
+        osc-freq = <8000000>;
+        reg = <0>;
+        spi-max-frequency = <1000000>;
+        int-gpios = <&gpio1 10 (GPIO_ACTIVE_LOW)>;
+        status = "okay";
+        label = "CAN_1";
+        bus-speed = <500000>;
+        #address-cells = <1>;
+    };
+};
+
+
+// &spi1 {
+    //         compatible = "nordic,nrf-spi";
+    //         status = "okay";
+    //         cs-gpios = <&gpio0 18 GPIO_ACTIVE_LOW>;
+    //         pinctrl-0 = <&spi1_default>;
+    //         pinctrl-1 = <&spi1_sleep>;
+    //         pinctrl-names = "default", "sleep";
+    //         gendev: gendev@0 {
+        //                 compatible = "vnd,spi-device";
+        //                 reg = <0>;
+        //                 spi-max-frequency = <1600000>;
+        //                 label = "GenDev";
+    //         };
+// };
+
+// &spi4 {
+    //     status = "okay";
+    //     cs-gpios = <&gpio1 9 GPIO_ACTIVE_LOW>;
+    //     pinctrl-0 = <&spi4_default>;
+    //     //pinctrl-names = "default";
+
+    //     canbus: mcp2515@0 {
+        //         compatible = "microchip,mcp2515";
+        //         spi-max-frequency = <1000000>;
+        //         int-gpios = <&gpio1 10 (GPIO_ACTIVE_LOW)>;
+        //         status = "okay";
+        //         label = "CAN_1";
+        //         reg = <0x0>;
+        //         osc-freq = <16000000>;
+        //         bus-speed = <500000>;
+        //         sjw = <1>;
+        //         prop-seg = <2>;
+        //         phase-seg1 = <7>;
+        //         phase-seg2 = <6>;
+        //         #address-cells = <1>;
+        //         #size-cells = <0>;
+    //     };
+// };
+
+// / {
+    //     chosen {
+        //         zephyr,canbus = &canbus;
+    //     };
+// };

@@ -1,0 +1,63 @@
+cmake:
+  application:
+    configuration-dir: '/home/diana/ncs/v3.1.0/test-app-2'
+    source-dir: '/home/diana/ncs/v3.1.0/test-app-2'
+  board:
+    name: 'nrf5340dk'
+    path:
+     - '/home/diana/ncs/v3.1.0/zephyr/boards/nordic/nrf5340dk'
+    qualifiers: 'nrf5340/cpuapp/ns'
+    revision: ''
+  devicetree:
+    bindings-dirs:
+     - '/home/diana/ncs/v3.1.0/nrf/dts/bindings'
+     - '/home/diana/ncs/v3.1.0/zephyr/dts/bindings'
+    extra-user-files:
+     - 'nrf5340dk_nrf5340_cpuapp_ns.overlay'
+    files:
+     - '/home/diana/ncs/v3.1.0/zephyr/boards/nordic/nrf5340dk/nrf5340dk_nrf5340_cpuapp_ns.dts'
+     - '/home/diana/ncs/v3.1.0/test-app-2/nrf5340dk_nrf5340_cpuapp_ns.overlay'
+     - 'nrf5340dk_nrf5340_cpuapp_ns.overlay'
+    include-dirs:
+     - '/home/diana/ncs/v3.1.0/nrf/include'
+     - '/home/diana/ncs/v3.1.0/nrf/dts/common'
+     - '/home/diana/ncs/v3.1.0/nrf/dts/riscv'
+     - '/home/diana/ncs/v3.1.0/nrf/dts/arm'
+     - '/home/diana/ncs/v3.1.0/nrf/dts'
+     - '/home/diana/ncs/v3.1.0/test-app-2/include'
+     - '/home/diana/ncs/v3.1.0/zephyr/include'
+     - '/home/diana/ncs/v3.1.0/zephyr/include/zephyr'
+     - '/home/diana/ncs/v3.1.0/zephyr/dts/common'
+     - '/home/diana/ncs/v3.1.0/zephyr/dts/vendor'
+     - '/home/diana/ncs/v3.1.0/zephyr/dts/rx'
+     - '/home/diana/ncs/v3.1.0/zephyr/dts/x86'
+     - '/home/diana/ncs/v3.1.0/zephyr/dts/xtensa'
+     - '/home/diana/ncs/v3.1.0/zephyr/dts/sparc'
+     - '/home/diana/ncs/v3.1.0/zephyr/dts/riscv'
+     - '/home/diana/ncs/v3.1.0/zephyr/dts/posix'
+     - '/home/diana/ncs/v3.1.0/zephyr/dts/arm64'
+     - '/home/diana/ncs/v3.1.0/zephyr/dts/arm'
+     - '/home/diana/ncs/v3.1.0/zephyr/dts/arc'
+     - '/home/diana/ncs/v3.1.0/zephyr/dts'
+    user-files:
+     - '/home/diana/ncs/v3.1.0/test-app-2/nrf5340dk_nrf5340_cpuapp_ns.overlay'
+  images:
+   - name: 'tfm'
+     source-dir: '/home/diana/ncs/v3.1.0/modules/tee/tf-m/trusted-firmware-m'
+  kconfig:
+    files:
+     - '/home/diana/ncs/v3.1.0/zephyr/boards/nordic/nrf5340dk/nrf5340dk_nrf5340_cpuapp_ns_defconfig'
+     - '/home/diana/ncs/v3.1.0/test-app-2/prj.conf'
+     - '/home/diana/ncs/v3.1.0/test-app-2/build/test-app-2/zephyr/.config.sysbuild'
+    user-files:
+     - 'prj.conf'
+  toolchain:
+    name: 'zephyr'
+    path: '/home/diana/ncs/toolchains/c5be9c56c7/opt/zephyr-sdk'
+  vendor-specific:
+    nordic:
+      svdfile: '/home/diana/ncs/v3.1.0/modules/hal/nordic/nrfx/mdk/nrf5340_application.svd'
+  zephyr:
+    version: '4.1.99'
+    zephyr-base: '/home/diana/ncs/v3.1.0/zephyr'
+version: '0.1.0'

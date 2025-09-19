@@ -1,0 +1,7 @@
+default: test-app-2
+build_dir: /home/diana/ncs/v3.1.0/test-app-2/build
+domains:
+  - name: test-app-2
+    build_dir: /home/diana/ncs/v3.1.0/test-app-2/build/test-app-2
+flash_order:
+  - test-app-2

@@ -1,0 +1,2 @@
+"nrf":"/home/diana/ncs/v3.1.0/nrf":"/home/diana/ncs/v3.1.0/nrf/sysbuild"
+"mcuboot":"/home/diana/ncs/v3.1.0/bootloader/mcuboot":"/home/diana/ncs/v3.1.0/bootloader/mcuboot/boot/zephyr/sysbuild"
