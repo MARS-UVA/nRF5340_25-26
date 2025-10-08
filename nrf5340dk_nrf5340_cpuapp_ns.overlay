@@ -10,15 +10,35 @@
 
 // For more help, browse the DeviceTree documentation at https: //docs.zephyrproject.org/latest/guides/dts/index.html
 // You can also visit the nRF DeviceTree extension documentation at https: //docs.nordicsemi.com/bundle/nrf-connect-vscode/page/guides/ncs_configure_app.html#devicetree-support-in-the-extension
-&i2c1 {
+// &i2c1 {
+    //     status = "okay";
+    //     clock-frequency = <I2C_BITRATE_STANDARD>;
+    //     pinctrl-0 = <&i2c1_default>;
+    //     pinctrl-1 = <&i2c1_sleep>;
+    //     pinctrl-names = "default", "sleep";
+    //     imu: imu@28 {
+        //         compatible = "i2c-device";
+        //         reg = <0x28>;
+        //         label = "IMU";
+    //     };
+// };
+
+/ {
+    zephyr,user {
+        io-channels = <&adc 0>;
+    };
+};
+
+&adc {
+    #address-cells = <1>;
+    #size-cells = <0>;
     status = "okay";
-    clock-frequency = <I2C_BITRATE_STANDARD>;
-    pinctrl-0 = <&i2c1_default>;
-    pinctrl-1 = <&i2c1_sleep>;
-    pinctrl-names = "default", "sleep";
-    imu: imu@28 {
-        compatible = "i2c-device";
-        reg = <0x28>;
-        label = "IMU";
+    channel@0 {
+        reg = <0>;
+        zephyr,gain = "ADC_GAIN_1_6";
+        zephyr,reference = "ADC_REF_INTERNAL";
+        zephyr,acquisition-time = <ADC_ACQ_TIME_DEFAULT>;
+        zephyr,input-positive = <NRF_SAADC_AIN0>; /* P0.02 for nRF52xx, P0.04 for nRF5340 */
+        zephyr,resolution = <12>;
     };
 };
