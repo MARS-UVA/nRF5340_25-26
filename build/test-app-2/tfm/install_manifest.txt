@@ -138,8 +138,6 @@
 /home/diana/ncs/v3.1.0/test-app-2/build/test-app-2/tfm/api_ns/platform/ext/cmsis/Include/r-profile/cmsis_armclang_r.h
 /home/diana/ncs/v3.1.0/test-app-2/build/test-app-2/tfm/api_ns/platform/ext/cmsis/Include/r-profile/cmsis_iccarm_r.h
 /home/diana/ncs/v3.1.0/test-app-2/build/test-app-2/tfm/api_ns/platform/ext/cmsis/Include/r-profile/cmsis_gcc_r.h
-/home/diana/ncs/v3.1.0/test-app-2/build/test-app-2/tfm/api_ns/platform/ext/common/uart_stdout.c
-/home/diana/ncs/v3.1.0/test-app-2/build/test-app-2/tfm/api_ns/platform/ext/common/uart_stdout.h
 /home/diana/ncs/v3.1.0/test-app-2/build/test-app-2/tfm/api_ns/platform/include/tfm_plat_test.h
 /home/diana/ncs/v3.1.0/test-app-2/build/test-app-2/tfm/api_ns/platform/include/tfm_attest_hal.h
 /home/diana/ncs/v3.1.0/test-app-2/build/test-app-2/tfm/api_ns/platform/include/mbedtls_entropy_nv_seed_config.h
