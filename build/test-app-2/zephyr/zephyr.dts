@@ -253,7 +253,7 @@
 				                "sleep";        /* in test-app-2/build/test-app-2/zephyr/nrf5340dk_nrf5340_cpuapp_ns.overlay:18 */
 				clock-frequency = < 0x186a0 >;  /* in test-app-2/build/test-app-2/zephyr/nrf5340dk_nrf5340_cpuapp_ns.overlay:15 */
 
-				/* node '/soc/peripheral@40000000/i2c@9000/imu@28' defined in test-app-2/nrf5340dk_nrf5340_cpuapp_ns.overlay:19 */
+				/* node '/soc/peripheral@40000000/i2c@9000/imu@28' defined in test-app-2/build/test-app-2/zephyr/nrf5340dk_nrf5340_cpuapp_ns.overlay:19 */
 				imu: imu@28 {
 					compatible = "i2c-device"; /* in test-app-2/build/test-app-2/zephyr/nrf5340dk_nrf5340_cpuapp_ns.overlay:20 */
 					reg = < 0x28 >;            /* in test-app-2/build/test-app-2/zephyr/nrf5340dk_nrf5340_cpuapp_ns.overlay:21 */
@@ -304,16 +304,16 @@
 				pinctrl-names = "default",
 				                "sleep";        /* in zephyr/boards/nordic/nrf5340dk/nrf5340_cpuapp_common.dtsi:162 */
 
-				/* node '/soc/peripheral@40000000/spi@a000/mcp2515@0' defined in test-app-2/nrf5340dk_nrf5340_cpuapp_ns.overlay:31 */
+				/* node '/soc/peripheral@40000000/spi@a000/mcp2515@0' defined in test-app-2/build/test-app-2/zephyr/nrf5340dk_nrf5340_cpuapp_ns.overlay:31 */
 				can: mcp2515@0 {
 					compatible = "microchip,mcp2515"; /* in test-app-2/build/test-app-2/zephyr/nrf5340dk_nrf5340_cpuapp_ns.overlay:32 */
-					osc-freq = < 0x7a1200 >;          /* in test-app-2/build/test-app-2/zephyr/nrf5340dk_nrf5340_cpuapp_ns.overlay:33 */
+					osc-freq = < 0x989680 >;          /* in test-app-2/build/test-app-2/zephyr/nrf5340dk_nrf5340_cpuapp_ns.overlay:33 */
 					reg = < 0x0 >;                    /* in test-app-2/build/test-app-2/zephyr/nrf5340dk_nrf5340_cpuapp_ns.overlay:34 */
 					spi-max-frequency = < 0x7a120 >;  /* in test-app-2/build/test-app-2/zephyr/nrf5340dk_nrf5340_cpuapp_ns.overlay:35 */
 					int-gpios = < &gpio1 0xa 0x1 >;   /* in test-app-2/build/test-app-2/zephyr/nrf5340dk_nrf5340_cpuapp_ns.overlay:36 */
 					status = "okay";                  /* in test-app-2/build/test-app-2/zephyr/nrf5340dk_nrf5340_cpuapp_ns.overlay:37 */
 					label = "CAN_1";                  /* in test-app-2/build/test-app-2/zephyr/nrf5340dk_nrf5340_cpuapp_ns.overlay:38 */
-					bitrate = < 0x1e848 >;            /* in test-app-2/build/test-app-2/zephyr/nrf5340dk_nrf5340_cpuapp_ns.overlay:39 */
+					bitrate = < 0xf4240 >;            /* in test-app-2/build/test-app-2/zephyr/nrf5340dk_nrf5340_cpuapp_ns.overlay:39 */
 					#address-cells = < 0x1 >;         /* in test-app-2/build/test-app-2/zephyr/nrf5340dk_nrf5340_cpuapp_ns.overlay:40 */
 				};
 			};
@@ -996,9 +996,9 @@
 
 			/* node '/pin-controller/spi4_default/group1' defined in zephyr/boards/nordic/nrf5340dk/nrf5340_cpuapp_common-pinctrl.dtsi:111 */
 			group1 {
-				psels = < 0x4000008 >,
-				        < 0x600000a >,
-				        < 0x5000009 >; /* in test-app-2/build/test-app-2/zephyr/nrf5340dk_nrf5340_cpuapp_ns.overlay:48 */
+				psels = < 0x400002f >,
+				        < 0x600002e >,
+				        < 0x500002d >; /* in zephyr/boards/nordic/nrf5340dk/nrf5340_cpuapp_common-pinctrl.dtsi:112 */
 			};
 		};
 
@@ -1008,10 +1008,10 @@
 
 			/* node '/pin-controller/spi4_sleep/group1' defined in zephyr/boards/nordic/nrf5340dk/nrf5340_cpuapp_common-pinctrl.dtsi:119 */
 			group1 {
-				psels = < 0x4000008 >,
-				        < 0x600000a >,
-				        < 0x5000009 >; /* in test-app-2/build/test-app-2/zephyr/nrf5340dk_nrf5340_cpuapp_ns.overlay:56 */
-				low-power-enable;      /* in test-app-2/build/test-app-2/zephyr/nrf5340dk_nrf5340_cpuapp_ns.overlay:59 */
+				psels = < 0x400002f >,
+				        < 0x600002e >,
+				        < 0x500002d >; /* in zephyr/boards/nordic/nrf5340dk/nrf5340_cpuapp_common-pinctrl.dtsi:120 */
+				low-power-enable;      /* in zephyr/boards/nordic/nrf5340dk/nrf5340_cpuapp_common-pinctrl.dtsi:123 */
 			};
 		};
 	};

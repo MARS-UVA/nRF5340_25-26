@@ -517,9 +517,6 @@ NRF_PROVISIONING:BOOL=OFF
 //Enable secure approtect
 NRF_SECURE_APPROTECT:BOOL=OFF
 
-//The UART instance number to use for secure UART
-NRF_SECURE_UART_INSTANCE:STRING=1
-
 //nrf_security root folder
 NRF_SECURITY_ROOT:STRING=/home/diana/ncs/v3.1.0/nrf/subsys/nrf_security
 

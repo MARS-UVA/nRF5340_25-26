@@ -322,7 +322,7 @@ DTC:FILEPATH=/home/diana/ncs/toolchains/c5be9c56c7/usr/bin/dtc
 // parameter. These settings will override the settings in the
 // board's .dts file. Multiple files may be listed, e.g. DTC_OVERLAY_FILE="dts1.overlay
 // dts2.overlay"
-DTC_OVERLAY_FILE:STRING=/home/diana/ncs/v3.1.0/test-app-2/nrf5340dk_nrf5340_cpuapp_ns.overlay
+DTC_OVERLAY_FILE:STRING=nrf5340dk_nrf5340_cpuapp_ns.overlay
 
 //Use to ensure we add links only once
 EXTERNAL_CRYPTO_CORE_HANDLED_PSA_CRYPTO_CONFIG:BOOL=False

@@ -12,11 +12,8 @@ cmake:
     bindings-dirs:
      - '/home/diana/ncs/v3.1.0/nrf/dts/bindings'
      - '/home/diana/ncs/v3.1.0/zephyr/dts/bindings'
-    extra-user-files:
-     - 'nrf5340dk_nrf5340_cpuapp_ns.overlay'
     files:
      - '/home/diana/ncs/v3.1.0/zephyr/boards/nordic/nrf5340dk/nrf5340dk_nrf5340_cpuapp_ns.dts'
-     - '/home/diana/ncs/v3.1.0/test-app-2/nrf5340dk_nrf5340_cpuapp_ns.overlay'
      - 'nrf5340dk_nrf5340_cpuapp_ns.overlay'
     include-dirs:
      - '/home/diana/ncs/v3.1.0/nrf/include'
@@ -40,7 +37,7 @@ cmake:
      - '/home/diana/ncs/v3.1.0/zephyr/dts/arc'
      - '/home/diana/ncs/v3.1.0/zephyr/dts'
     user-files:
-     - '/home/diana/ncs/v3.1.0/test-app-2/nrf5340dk_nrf5340_cpuapp_ns.overlay'
+     - 'nrf5340dk_nrf5340_cpuapp_ns.overlay'
   images:
    - name: 'tfm'
      source-dir: '/home/diana/ncs/v3.1.0/modules/tee/tf-m/trusted-firmware-m'

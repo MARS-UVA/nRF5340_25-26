@@ -5649,13 +5649,13 @@
 #define DT_N_S_pin_controller_S_spi4_default_S_group1_PINCTRL_NUM 0
 
 /* Generic property macros: */
-#define DT_N_S_pin_controller_S_spi4_default_S_group1_P_psels {67108872 /* 0x4000008 */, 100663306 /* 0x600000a */, 83886089 /* 0x5000009 */}
+#define DT_N_S_pin_controller_S_spi4_default_S_group1_P_psels {67108911 /* 0x400002f */, 100663342 /* 0x600002e */, 83886125 /* 0x500002d */}
 #define DT_N_S_pin_controller_S_spi4_default_S_group1_P_psels_IDX_0_EXISTS 1
-#define DT_N_S_pin_controller_S_spi4_default_S_group1_P_psels_IDX_0 67108872
+#define DT_N_S_pin_controller_S_spi4_default_S_group1_P_psels_IDX_0 67108911
 #define DT_N_S_pin_controller_S_spi4_default_S_group1_P_psels_IDX_1_EXISTS 1
-#define DT_N_S_pin_controller_S_spi4_default_S_group1_P_psels_IDX_1 100663306
+#define DT_N_S_pin_controller_S_spi4_default_S_group1_P_psels_IDX_1 100663342
 #define DT_N_S_pin_controller_S_spi4_default_S_group1_P_psels_IDX_2_EXISTS 1
-#define DT_N_S_pin_controller_S_spi4_default_S_group1_P_psels_IDX_2 83886089
+#define DT_N_S_pin_controller_S_spi4_default_S_group1_P_psels_IDX_2 83886125
 #define DT_N_S_pin_controller_S_spi4_default_S_group1_P_psels_FOREACH_PROP_ELEM(fn) fn(DT_N_S_pin_controller_S_spi4_default_S_group1, psels, 0) \
 	fn(DT_N_S_pin_controller_S_spi4_default_S_group1, psels, 1) \
 	fn(DT_N_S_pin_controller_S_spi4_default_S_group1, psels, 2)
@@ -5829,13 +5829,13 @@
 #define DT_N_S_pin_controller_S_spi4_sleep_S_group1_PINCTRL_NUM 0
 
 /* Generic property macros: */
-#define DT_N_S_pin_controller_S_spi4_sleep_S_group1_P_psels {67108872 /* 0x4000008 */, 100663306 /* 0x600000a */, 83886089 /* 0x5000009 */}
+#define DT_N_S_pin_controller_S_spi4_sleep_S_group1_P_psels {67108911 /* 0x400002f */, 100663342 /* 0x600002e */, 83886125 /* 0x500002d */}
 #define DT_N_S_pin_controller_S_spi4_sleep_S_group1_P_psels_IDX_0_EXISTS 1
-#define DT_N_S_pin_controller_S_spi4_sleep_S_group1_P_psels_IDX_0 67108872
+#define DT_N_S_pin_controller_S_spi4_sleep_S_group1_P_psels_IDX_0 67108911
 #define DT_N_S_pin_controller_S_spi4_sleep_S_group1_P_psels_IDX_1_EXISTS 1
-#define DT_N_S_pin_controller_S_spi4_sleep_S_group1_P_psels_IDX_1 100663306
+#define DT_N_S_pin_controller_S_spi4_sleep_S_group1_P_psels_IDX_1 100663342
 #define DT_N_S_pin_controller_S_spi4_sleep_S_group1_P_psels_IDX_2_EXISTS 1
-#define DT_N_S_pin_controller_S_spi4_sleep_S_group1_P_psels_IDX_2 83886089
+#define DT_N_S_pin_controller_S_spi4_sleep_S_group1_P_psels_IDX_2 83886125
 #define DT_N_S_pin_controller_S_spi4_sleep_S_group1_P_psels_FOREACH_PROP_ELEM(fn) fn(DT_N_S_pin_controller_S_spi4_sleep_S_group1, psels, 0) \
 	fn(DT_N_S_pin_controller_S_spi4_sleep_S_group1, psels, 1) \
 	fn(DT_N_S_pin_controller_S_spi4_sleep_S_group1, psels, 2)
@@ -18123,7 +18123,7 @@
 #define DT_N_S_soc_S_peripheral_40000000_S_spi_a000_S_mcp2515_0_PINCTRL_NUM 0
 
 /* Generic property macros: */
-#define DT_N_S_soc_S_peripheral_40000000_S_spi_a000_S_mcp2515_0_P_osc_freq 8000000
+#define DT_N_S_soc_S_peripheral_40000000_S_spi_a000_S_mcp2515_0_P_osc_freq 10000000
 #define DT_N_S_soc_S_peripheral_40000000_S_spi_a000_S_mcp2515_0_P_osc_freq_EXISTS 1
 #define DT_N_S_soc_S_peripheral_40000000_S_spi_a000_S_mcp2515_0_P_int_gpios_IDX_0_EXISTS 1
 #define DT_N_S_soc_S_peripheral_40000000_S_spi_a000_S_mcp2515_0_P_int_gpios_IDX_0_PH DT_N_S_soc_S_peripheral_40000000_S_gpio_842800
@@ -18203,7 +18203,7 @@
 #define DT_N_S_soc_S_peripheral_40000000_S_spi_a000_S_mcp2515_0_P_wakeup_source_EXISTS 1
 #define DT_N_S_soc_S_peripheral_40000000_S_spi_a000_S_mcp2515_0_P_zephyr_pm_device_runtime_auto 0
 #define DT_N_S_soc_S_peripheral_40000000_S_spi_a000_S_mcp2515_0_P_zephyr_pm_device_runtime_auto_EXISTS 1
-#define DT_N_S_soc_S_peripheral_40000000_S_spi_a000_S_mcp2515_0_P_bitrate 125000
+#define DT_N_S_soc_S_peripheral_40000000_S_spi_a000_S_mcp2515_0_P_bitrate 1000000
 #define DT_N_S_soc_S_peripheral_40000000_S_spi_a000_S_mcp2515_0_P_bitrate_EXISTS 1
 
 /*

@@ -76,7 +76,7 @@ CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 CONF_FILE:UNINITIALIZED=prj.conf
 
 //No help, variable specified on the command line.
-EXTRA_DTC_OVERLAY_FILE:UNINITIALIZED=nrf5340dk_nrf5340_cpuapp_ns.overlay
+DTC_OVERLAY_FILE:UNINITIALIZED=nrf5340dk_nrf5340_cpuapp_ns.overlay
 
 //No help, variable specified on the command line.
 WEST_PYTHON:UNINITIALIZED=/home/diana/ncs/toolchains/c5be9c56c7/usr/local/bin/python3.12

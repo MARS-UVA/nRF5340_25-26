@@ -43,8 +43,6 @@ void send_can_message(const struct device *dev, int identifier, char *message, u
 
         int ret = can_send(dev, &frame, K_FOREVER, NULL, NULL);
 
-        printk("can_send returned: %d\n", ret);
-
         if (ret != 0)
         {
                 printk("Failed to send CAN message: %d\n", ret);
@@ -124,7 +122,6 @@ int main(void)
 
         //         k_sleep(K_MSEC(100));
         // }
-
         int ret;
 
         if (!device_is_ready(dev_can))
@@ -173,7 +170,7 @@ int main(void)
         {
                 send_can_message(dev_can, 0x401bf, GLOBAL_ENABLE_FRAME, 2);
                 k_msleep(10);
-                int value = 127;
+                int value = 0;
                 send_can_message(dev_can, 27 | 0x204b540, (char[]){0, 1, 0, 0, 0, 0, value & 0xFF, (value >> 8) & 0xFF}, 8);
                 k_msleep(10);
                 printk("Message sent\n");
