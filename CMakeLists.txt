@@ -3,5 +3,5 @@ find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
 
 project(test-app-2)
 
-target_sources(app PRIVATE src/main.c)
+target_sources(app PRIVATE src/main.c src/can.c src/talon_fx.c)
 target_include_directories(app PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
