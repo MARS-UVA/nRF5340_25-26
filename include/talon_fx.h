@@ -30,7 +30,7 @@ typedef struct talon_fx
     void (*set)(struct talon_fx *self, double value);
     void (*set_neutral_mode)(struct talon_fx *self, talon_fx_neutral_mode_t mode);
     void (*apply_supply_current_limit)(struct talon_fx *self, float limit);
-    void (*apply_config)(struct talon_fx *self, const talon_fx_slot0_config_t *config);
+    void (*apply_config)(struct talon_fx *self, talon_fx_slot0_config_t *config);
     void (*set_control)(struct talon_fx *self, int control_mode, double value);
     void (*set_closed_loop_ramp_period)(struct talon_fx *self, float period_s);
 } talon_fx_t;
