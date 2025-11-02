@@ -23,7 +23,7 @@ void configure_can_device(const struct device *dev)
     if (ret != 0)
     {
         LOG_ERR("Error setting CAN mode [%d]", ret);
-        return 0;
+        return;
     }
 
     k_msleep(10);
@@ -33,7 +33,7 @@ void configure_can_device(const struct device *dev)
     if (ret != 0)
     {
         LOG_ERR("Error starting CAN controller [%d]", ret);
-        return 0;
+        return;
     }
 
     LOG_INF("CAN device %s configured.", dev->name);
