@@ -29,9 +29,7 @@ int control_thread(void)
         while (1)
         {
                 send_global_enable_frame(dev_can);
-                // k_msleep(10);
                 motor.set(&motor, 0.5);
-                // k_msleep(10);
         }
         return 0;
 }
