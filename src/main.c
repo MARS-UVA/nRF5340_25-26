@@ -5,6 +5,7 @@
 #include <zephyr/drivers/can.h>
 #include "can.h"
 #include "talon_fx.h"
+#include "talon_srx.h"
 #include <zephyr/logging/log.h>
 
 LOG_MODULE_REGISTER(main, LOG_LEVEL_INF);
@@ -18,6 +19,7 @@ static const struct device *dev_can = DEVICE_DT_GET(CAN1_NODE);
 #define CONTROL_THREAD_PRIORITY 5
 
 talon_fx_t motor;
+talon_srx_t actuator;
 
 int control_thread(void)
 {
@@ -29,7 +31,8 @@ int control_thread(void)
         while (1)
         {
                 send_global_enable_frame(dev_can);
-                motor.set(&motor, 0.5);
+                motor.set(&motor, 0.0);
+                actuator.set(&actuator, 1);
         }
         return 0;
 }
@@ -43,6 +46,7 @@ int main(void)
         configure_can_device(dev_can);
 
         talon_fx_init(&motor, dev_can, 27);
+        talon_srx_init(&actuator, dev_can, 0, false);
 
         LOG_INF("Devices initialized. Entering main loop.");
 
