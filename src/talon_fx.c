@@ -1,4 +1,5 @@
 #include "talon_fx.h"
+#include "util.h"
 
 void talon_fx_send_can_message(talon_fx_t *self, int msg_id, char *message, uint8_t length)
 {
@@ -29,7 +30,7 @@ void talon_fx_set_neutral_mode(talon_fx_t *self, talon_fx_neutral_mode_t mode)
 
 void talon_fx_apply_supply_current_limit(talon_fx_t *self, float current) {
 	char x[] = {0x21, 0x70, 0x08, 0, 0, 0, 0, 0xaa};
-	floatToByteArray(current, &x[3]);
+	float_to_byte_array(current, &x[3]);
 	talon_fx_send_can_message(self, 0x2047c00, x, 8);
 	talon_fx_send_can_message(self, 0x2047c00, "\x10\x0c\xc5\x06\x0d\x00\x00\x00", 8);
 	k_msleep(1);
@@ -53,7 +54,7 @@ void talon_fx_apply_config(talon_fx_t *self, talon_fx_slot0_config_t *config)
 	for (int i = 0; i < 7; i++)
 	{
 		char x[] = { 0x21, 0x53 + i, 0x08, 0, 0, 0, 0, 0xaa };
-		floatToByteArray(*configs[i], &x[3]);
+		float_to_byte_array(*configs[i], &x[3]);
 		talon_fx_send_can_message(self, 0x2047c00, x, 8);
 		talon_fx_send_can_message(self, 0x2047c00, "\x10\x0c\xc5\x06\x0d\x00\x00\x00", 8);
 		k_msleep(1);
@@ -85,7 +86,7 @@ void talon_fx_set_control(talon_fx_t *self, int velocity, double feedforward)
 void talon_fx_set_closed_loop_ramp_period(talon_fx_t *self, float period)
 {
 	char x[] = {0x21, 0x84, 0x08, 0x00, 0x00, 0x00, 0x00, 0xaa};
-	floatToByteArray(period, &x[3]);
+	float_to_byte_array(period, &x[3]);
 	talon_fx_send_can_message(self, 0x2047c00, x, 8);
 	talon_fx_send_can_message(self, 0x2047c00, "\x10\x0c\xc5\x06\x0d\x00\x00\x00", 8);
 	k_msleep(1);

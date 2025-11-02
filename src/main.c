@@ -31,8 +31,10 @@ int control_thread(void)
         while (1)
         {
                 send_global_enable_frame(dev_can);
-                motor.set(&motor, 0.0);
-                actuator.set(&actuator, 1);
+                motor.apply_supply_current_limit(&motor, 50.0);
+                motor.set(&motor, 1);
+                // actuator.set(&actuator, 1);
+                k_msleep(50);
         }
         return 0;
 }
