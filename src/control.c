@@ -55,3 +55,26 @@ void direct_control(serial_packet_t *pkt)
         LOG_INF("Actuator position control not implemented.");
     }
 }
+
+bool talons_initialized(void)
+{
+    return front_left_motor.initialized &&
+           back_left_motor.initialized &&
+           front_right_motor.initialized &&
+           back_right_motor.initialized &&
+           bucket_drum_motor.initialized &&
+           left_actuator.initialized &&
+           right_actuator.initialized;
+}
+
+void initialize_talons(const struct device *can_dev)
+{
+    talon_fx_init(&front_left_motor, can_dev, FRONT_LEFT_WHEEL_ID);
+    talon_fx_init(&back_left_motor, can_dev, BACK_LEFT_WHEEL_ID);
+    talon_fx_init(&front_right_motor, can_dev, FRONT_RIGHT_WHEEL_ID);
+    talon_fx_init(&back_right_motor, can_dev, BACK_RIGHT_WHEEL_ID);
+    talon_fx_init(&bucket_drum_motor, can_dev, BUCKET_DRUM_ID);
+
+    talon_srx_init(&left_actuator, can_dev, LEFT_ACTUATOR_ID, false);
+    talon_srx_init(&right_actuator, can_dev, RIGHT_ACTUATOR_ID, false);
+}

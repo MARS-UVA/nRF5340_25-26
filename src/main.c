@@ -23,7 +23,7 @@ talon_srx_t actuator;
 
 int control_thread(void)
 {
-        while (!motor.initialized)
+        while (!talons_initialized())
         {
                 k_msleep(100);
         }
@@ -51,8 +51,7 @@ int main(void)
 
         configure_can_device(dev_can);
 
-        talon_fx_init(&motor, dev_can, 27);
-        talon_srx_init(&actuator, dev_can, 0, false);
+        initialize_talons(dev_can);
 
         LOG_INF("Devices initialized. Entering main loop.");
 

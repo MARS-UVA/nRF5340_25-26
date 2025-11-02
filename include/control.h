@@ -27,5 +27,7 @@
 #define DIRECT_ACTUATOR_CONTROL 1
 
 void direct_control(serial_packet_t *pkt);
+void initialize_talons(const struct device *can_dev);
+bool talons_initialized(void);
 
 #endif /* CONTROL_H_ */
