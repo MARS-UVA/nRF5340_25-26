@@ -10,6 +10,28 @@
 
 // For more help, browse the DeviceTree documentation at https: //docs.zephyrproject.org/latest/guides/dts/index.html
 // You can also visit the nRF DeviceTree extension documentation at https: //docs.nordicsemi.com/bundle/nrf-connect-vscode/page/guides/ncs_configure_app.html#devicetree-support-in-the-extension
+
+// https://academy.nordicsemi.com/courses/nrf-connect-sdk-intermediate/lessons/lesson-6-analog-to-digital-converter-adc/topic/exercise-1-interfacing-with-adc-using-zephyr-api/
+/ {
+	zephyr,user {
+		io-channels = <&adc 0>;
+	};
+};
+
+&adc {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	status = "okay";
+	channel@0 {
+		reg = <0>;
+		zephyr,gain = "ADC_GAIN_1_6";
+		zephyr,reference = "ADC_REF_INTERNAL";
+		zephyr,acquisition-time = <ADC_ACQ_TIME_DEFAULT>;
+		zephyr,input-positive = <NRF_SAADC_AIN0>; /* P0.02 for nRF52xx, P0.04 for nRF5340 */
+		zephyr,resolution = <12>;
+	};
+};
+
 &i2c1 {
     status = "okay";
     clock-frequency = <I2C_BITRATE_STANDARD>;
