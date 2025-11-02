@@ -309,7 +309,7 @@
 					compatible = "microchip,mcp2515"; /* in test-app-2/build/test-app-2/zephyr/nrf5340dk_nrf5340_cpuapp_ns.overlay:32 */
 					osc-freq = < 0x989680 >;          /* in test-app-2/build/test-app-2/zephyr/nrf5340dk_nrf5340_cpuapp_ns.overlay:33 */
 					reg = < 0x0 >;                    /* in test-app-2/build/test-app-2/zephyr/nrf5340dk_nrf5340_cpuapp_ns.overlay:34 */
-					spi-max-frequency = < 0x7a120 >;  /* in test-app-2/build/test-app-2/zephyr/nrf5340dk_nrf5340_cpuapp_ns.overlay:35 */
+					spi-max-frequency = < 0x4c4b40 >; /* in test-app-2/build/test-app-2/zephyr/nrf5340dk_nrf5340_cpuapp_ns.overlay:35 */
 					int-gpios = < &gpio1 0xa 0x1 >;   /* in test-app-2/build/test-app-2/zephyr/nrf5340dk_nrf5340_cpuapp_ns.overlay:36 */
 					status = "okay";                  /* in test-app-2/build/test-app-2/zephyr/nrf5340dk_nrf5340_cpuapp_ns.overlay:37 */
 					label = "CAN_1";                  /* in test-app-2/build/test-app-2/zephyr/nrf5340dk_nrf5340_cpuapp_ns.overlay:38 */

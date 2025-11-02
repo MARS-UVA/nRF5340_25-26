@@ -22,7 +22,8 @@ typedef struct
 
 typedef struct talon_fx
 {
-    const struct device *can_dev;
+    bool initialized;
+    struct device *can_dev;
     int identifier;
 
     // Function pointers for control actions
@@ -38,6 +39,6 @@ typedef struct talon_fx
  * @brief Initializes a TalonFX structure.
  * @return Initialized TalonFX instance.
  */
-talon_fx_t talon_fx_init(const struct device *can_dev, int identifier);
+bool talon_fx_init(talon_fx_t *instance, const struct device *can_dev, int identifier);
 
 #endif /* INC_TALONFX_H_ */

@@ -391,7 +391,7 @@ set_target_properties(${DEVICETREE_TARGET} PROPERTIES "DT_NODE|/soc/peripheral@4
 set_target_properties(${DEVICETREE_TARGET} PROPERTIES "DT_NODELABEL|can" "/soc/peripheral@40000000/spi@a000/mcp2515@0")
 set_target_properties(${DEVICETREE_TARGET} PROPERTIES "DT_PROP|/soc/peripheral@40000000/spi@a000/mcp2515@0|osc-freq" "10000000")
 set_target_properties(${DEVICETREE_TARGET} PROPERTIES "DT_PROP|/soc/peripheral@40000000/spi@a000/mcp2515@0|reg" "0;")
-set_target_properties(${DEVICETREE_TARGET} PROPERTIES "DT_PROP|/soc/peripheral@40000000/spi@a000/mcp2515@0|spi-max-frequency" "500000")
+set_target_properties(${DEVICETREE_TARGET} PROPERTIES "DT_PROP|/soc/peripheral@40000000/spi@a000/mcp2515@0|spi-max-frequency" "5000000")
 set_target_properties(${DEVICETREE_TARGET} PROPERTIES "DT_PROP|/soc/peripheral@40000000/spi@a000/mcp2515@0|duplex" "0")
 set_target_properties(${DEVICETREE_TARGET} PROPERTIES "DT_PROP|/soc/peripheral@40000000/spi@a000/mcp2515@0|frame-format" "0")
 set_target_properties(${DEVICETREE_TARGET} PROPERTIES "DT_PROP|/soc/peripheral@40000000/spi@a000/mcp2515@0|spi-cpol" "False")

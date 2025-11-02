@@ -27,10 +27,14 @@ void talon_fx_set_neutral_mode(talon_fx_t *self, talon_fx_neutral_mode_t mode)
     talon_fx_send_can_message(self, 0x2047c00, "\x10\x0c\xc5\x06\x0d\x00\x00\x00", 8);
 }
 
-talon_fx_t talon_fx_init(const struct device *can_dev, int identifier)
+bool talon_fx_init(talon_fx_t *instance, const struct device *can_dev, int identifier)
 {
-    talon_fx_t instance = {
-        .can_dev = can_dev,
+    if (!instance)
+        return false;
+
+    *instance = (talon_fx_t){
+        .initialized = true,
+        .can_dev = (struct device *)can_dev,
         .identifier = identifier,
         .set = talon_fx_set,
         .set_neutral_mode = talon_fx_set_neutral_mode,
@@ -39,5 +43,6 @@ talon_fx_t talon_fx_init(const struct device *can_dev, int identifier)
         // .set_control = talon_fx_set_control,
         // .set_closed_loop_ramp_period = talon_fx_set_closed_loop_ramp_period,
     };
-    return instance;
+
+    return true;
 }

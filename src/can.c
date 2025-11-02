@@ -11,7 +11,7 @@ void configure_can_device(const struct device *dev)
 
     if (!device_is_ready(dev))
     {
-        printk("CAN device %s is not ready!\n\r", dev->name);
+        LOG_ERR("CAN device %s is not ready!", dev->name);
         return;
     }
 
@@ -36,7 +36,7 @@ void configure_can_device(const struct device *dev)
         return 0;
     }
 
-    LOG_INF("CAN device %s configured.\n", dev->name);
+    LOG_INF("CAN device %s configured.", dev->name);
 }
 
 void send_can_message(const struct device *dev, int identifier, char *message, uint8_t length)
@@ -48,19 +48,13 @@ void send_can_message(const struct device *dev, int identifier, char *message, u
     };
     memcpy(frame.data, message, length);
 
-    LOG_DBG("Sending CAN message with ID: 0x%X\n", identifier);
-    LOG_DBG("Data: ");
-    for (int i = 0; i < length; i++)
-    {
-        LOG_DBG("0x%02X ", frame.data[i]);
-    }
-    LOG_DBG("\n");
+    LOG_DBG("Sending CAN message with ID: 0x%X (%d bytes)", identifier, length);
 
     int ret = can_send(dev, &frame, K_FOREVER, NULL, NULL);
 
     if (ret != 0)
     {
-        LOG_ERR("Failed to send CAN message: %d\n", ret);
+        LOG_ERR("Failed to send CAN message: %d", ret);
     }
 }
 
