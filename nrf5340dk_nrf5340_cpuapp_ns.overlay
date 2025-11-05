@@ -41,21 +41,20 @@
     };
 };
 
-
 // &pinctrl {
     //     spi4_default: spi4_default {
         //         group1 {
             //             psels = <NRF_PSEL(SPIM_SCK, 0, 8)>,
-                       //                     <NRF_PSEL(SPIM_MISO, 0, 10)>,
-                       //                     <NRF_PSEL(SPIM_MOSI, 0, 9)>;
+                                   //                     <NRF_PSEL(SPIM_MISO, 0, 10)>,
+                                   //                     <NRF_PSEL(SPIM_MOSI, 0, 9)>;
         //         };
     //     };
 
     //     spi4_sleep: spi4_sleep {
         //         group1 {
             //             psels = <NRF_PSEL(SPIM_SCK, 0, 8)>,
-                       //                     <NRF_PSEL(SPIM_MISO, 0, 10)>,
-                       //                     <NRF_PSEL(SPIM_MOSI, 0, 9)>;
+                                   //                     <NRF_PSEL(SPIM_MISO, 0, 10)>,
+                                   //                     <NRF_PSEL(SPIM_MOSI, 0, 9)>;
             //             low-power-enable;
         //         };
     //     };
