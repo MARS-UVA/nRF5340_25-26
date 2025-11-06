@@ -8,7 +8,7 @@
 #include <zephyr/logging/log.h>
 #include "control.h"
 
-LOG_MODULE_REGISTER(control, LOG_LEVEL_INF);
+LOG_MODULE_REGISTER(control);
 
 extern const struct device *dev_can;
 
