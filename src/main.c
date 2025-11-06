@@ -7,6 +7,7 @@
 #include "talon_fx.h"
 #include "talon_srx.h"
 #include <zephyr/logging/log.h>
+#include "pot.h"
 
 LOG_MODULE_REGISTER(main, LOG_LEVEL_INF);
 
@@ -43,6 +44,7 @@ K_THREAD_DEFINE(control_thread_id, STACK_SIZE, control_thread, NULL, NULL, NULL,
 
 int main(void)
 {
+        demo();
         k_msleep(10);
 
         configure_can_device(dev_can);
