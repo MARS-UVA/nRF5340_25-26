@@ -25,6 +25,7 @@ int control_thread(void)
 {
         while (!talons_initialized())
         {
+                LOG_INF("Waiting for talons to initialize...");
                 k_msleep(100);
         }
 
@@ -44,7 +45,7 @@ int control_thread(void)
                         };
                 }
 
-                LOG_INF("Packet - FL: %d, BL: %d, FR: %d, BR: %d, Drum: %d, Actuator: %d",
+                LOG_DBG("Packet - FL: %d, BL: %d, FR: %d, BR: %d, Drum: %d, Actuator: %d",
                         pkt.front_left_wheel,
                         pkt.back_left_wheel,
                         pkt.front_right_wheel,

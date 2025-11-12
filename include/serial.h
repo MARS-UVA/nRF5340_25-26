@@ -8,11 +8,13 @@
 
 // Size of serial packet excluding the invalid byte
 #define SIZEOF_SERIAL_PACKET sizeof(serial_packet_t) - sizeof(uint8_t)
+#define SERIAL_START_BYTE 0xFF
 
 typedef struct __attribute__((packed))
 {
     int8_t invalid;
-    uint8_t header;
+    uint8_t start_byte;
+    uint8_t header_byte;
     uint8_t front_left_wheel;
     uint8_t back_left_wheel;
     uint8_t front_right_wheel;

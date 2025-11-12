@@ -6,7 +6,10 @@
 LOG_MODULE_REGISTER(serial);
 
 static size_t rx_count = 0;
-static uint8_t rx_buf[SIZEOF_UART_RX_BUFFER] = {0};
+static uint8_t uart_buf1[SIZEOF_UART_RX_BUFFER] = {0};
+static uint8_t uart_buf2[SIZEOF_UART_RX_BUFFER] = {0};
+static uint8_t rx_accumulator[SIZEOF_SERIAL_PACKET] = {0};
+static uint8_t *rx_buf = uart_buf1;
 
 void uart_cb(const struct device *dev, struct uart_event *evt, void *user_data)
 {
@@ -15,20 +18,25 @@ void uart_cb(const struct device *dev, struct uart_event *evt, void *user_data)
     switch (evt->type)
     {
     case UART_RX_RDY:
-        LOG_HEXDUMP_DBG(evt->data.rx.buf + evt->data.rx.offset, evt->data.rx.len, "UART RX Data:");
         for (size_t i = 0; i < evt->data.rx.len; i++)
         {
-            rx_buf[rx_count++] = evt->data.rx.buf[evt->data.rx.offset + i];
+            // Wait for header byte
+            if (rx_count == 0 && evt->data.rx.buf[evt->data.rx.offset + i] != SERIAL_START_BYTE)
+                continue;
+
+            rx_accumulator[rx_count++] = evt->data.rx.buf[evt->data.rx.offset + i];
             if (rx_count == SIZEOF_SERIAL_PACKET)
             {
                 serial_packet_t tmp = {.invalid = 0};
-                memcpy(&tmp.header, rx_buf, SIZEOF_SERIAL_PACKET);
+                memcpy(&tmp.start_byte, rx_accumulator, SIZEOF_SERIAL_PACKET);
                 rx_count = 0;
                 k_msgq_put(serial_msgq, &tmp, K_NO_WAIT);
             }
         }
         break;
     case UART_RX_BUF_REQUEST:
+        // Switch to the other buffer
+        rx_buf = (rx_buf == uart_buf1) ? uart_buf2 : uart_buf1;
         // Provide a new buffer for continuous reception
         uart_rx_buf_rsp(dev, rx_buf, SIZEOF_UART_RX_BUFFER);
         break;
