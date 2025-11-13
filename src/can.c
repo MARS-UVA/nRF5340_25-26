@@ -3,7 +3,7 @@
 
 #define GLOBAL_ENABLE_FRAME "\x01\x00"
 
-LOG_MODULE_REGISTER(can_bus, LOG_LEVEL_DBG);
+LOG_MODULE_REGISTER(can_bus);
 
 void configure_can_device(const struct device *dev)
 {

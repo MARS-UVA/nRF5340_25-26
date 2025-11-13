@@ -1,40 +1,60 @@
 #include <zephyr/kernel.h>
-#include <zephyr/drivers/i2c.h>
-#include "bno055.h"
-#include <zephyr/drivers/spi.h>
-#include <zephyr/drivers/can.h>
+#include <zephyr/logging/log.h>
 #include "can.h"
 #include "talon_fx.h"
 #include "talon_srx.h"
-#include <zephyr/logging/log.h>
+#include "control.h"
+#include "serial.h"
 
-LOG_MODULE_REGISTER(main, LOG_LEVEL_INF);
+LOG_MODULE_REGISTER(main);
 
 #define I2C1_NODE DT_NODELABEL(imu)
 #define CAN1_NODE DT_NODELABEL(can)
 
-static const struct device *dev_can = DEVICE_DT_GET(CAN1_NODE);
+const struct device *dev_can = DEVICE_DT_GET(CAN1_NODE);
+const struct device *dev_uart = DEVICE_DT_GET(DT_NODELABEL(uart0));
 
 #define STACK_SIZE 1024
-#define CONTROL_THREAD_PRIORITY 5
+
+K_MSGQ_DEFINE(serial_msgq, sizeof(serial_packet_t), 4, 4);
 
 talon_fx_t motor;
 talon_srx_t actuator;
 
 int control_thread(void)
 {
-        while (!motor.initialized)
+        while (!talons_initialized())
         {
+                LOG_INF("Waiting for talons to initialize...");
                 k_msleep(100);
         }
 
         while (1)
         {
-                send_global_enable_frame(dev_can);
-                motor.apply_supply_current_limit(&motor, 50.0);
-                motor.set(&motor, 1);
-                // actuator.set(&actuator, 1);
-                k_msleep(50);
+                serial_packet_t pkt;
+                int err = k_msgq_get(&serial_msgq, &pkt, K_MSEC(CONTROL_TIMEOUT_MS));
+                if (err != 0)
+                {
+                        pkt = (serial_packet_t){
+                            .front_left_wheel = 0x7f,
+                            .back_left_wheel = 0x7f,
+                            .front_right_wheel = 0x7f,
+                            .back_right_wheel = 0x7f,
+                            .drum = 0x7f,
+                            .actuator = 0x7f,
+                        };
+                }
+
+                LOG_DBG("Packet - FL: %d, BL: %d, FR: %d, BR: %d, Drum: %d, Actuator: %d",
+                        pkt.front_left_wheel,
+                        pkt.back_left_wheel,
+                        pkt.front_right_wheel,
+                        pkt.back_right_wheel,
+                        pkt.drum,
+                        pkt.actuator);
+
+                direct_control(&pkt);
+                k_msleep(10);
         }
         return 0;
 }
@@ -46,9 +66,9 @@ int main(void)
         k_msleep(10);
 
         configure_can_device(dev_can);
+        configure_uart_device(dev_uart, &serial_msgq);
 
-        talon_fx_init(&motor, dev_can, 27);
-        talon_srx_init(&actuator, dev_can, 0, false);
+        initialize_talons(dev_can);
 
         LOG_INF("Devices initialized. Entering main loop.");
 
