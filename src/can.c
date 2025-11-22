@@ -58,6 +58,40 @@ void send_can_message(const struct device *dev, int identifier, char *message, u
     }
 }
 
+void _rx_callback(const struct device *dev, struct can_frame *frame, void *user_data)
+{
+    /* !!! n.b. "The callback function is called from an interrupt context,
+     *           which means that the callback function should be as short
+     *           as possible and must not block." !!!
+     */
+    LOG_INF("TODO: Do something with can message (recvd btw)");
+}
+
+int can_receive_async(const struct device *dev, int identifier)
+{
+    LOG_INF("Setting up can receive, id %d", identifier);
+    const struct can_filter filter = {
+        .flags = 0U,
+        .id = identifier,
+        .mask = CAN_STD_ID_MASK,
+    };
+
+    void *user_data_for_callback_fn = NULL;
+
+    int filter_id = can_add_rx_filter(dev, _rx_callback, user_data_for_callback_fn, &filter);
+
+    if (filter_id < 0)
+    {
+        LOG_ERR("Unable to add rx filter [%d]", filter_id);
+    }
+    return filter_id;
+}
+
+void stop_receiving(const struct device *dev, int filter_id)
+{
+    can_remove_rx_filter(dev, filter_id);
+}
+
 void send_global_enable_frame(const struct device *dev)
 {
     send_can_message(dev, 0x401bf, GLOBAL_ENABLE_FRAME, 2);

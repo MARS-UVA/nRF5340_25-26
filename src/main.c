@@ -59,7 +59,7 @@ int control_thread(void)
         return 0;
 }
 
-K_THREAD_DEFINE(control_thread_id, STACK_SIZE, control_thread, NULL, NULL, NULL, CONTROL_THREAD_PRIORITY, 0, 0);
+// K_THREAD_DEFINE(control_thread_id, STACK_SIZE, control_thread, NULL, NULL, NULL, CONTROL_THREAD_PRIORITY, 0, 0);
 
 int main(void)
 {
@@ -69,14 +69,24 @@ int main(void)
         configure_uart_device(dev_uart, &serial_msgq);
 
         initialize_talons(dev_can);
+        
+        int id = 123;
+        char* message = "hi\0";
+        int msg_len = 3;
+        
+        can_receive_async(dev_can, id);
 
         LOG_INF("Devices initialized. Entering main loop.");
 
         while (1)
         {
                 LOG_INF("Heartbeat");
+                send_can_message(dev_can, id, message, msg_len);
+                LOG_INF("Sent can message: \"%s\"", message);
                 k_msleep(1000);
         }
+        
+        stop_receiving(dev_can, id);
 
         return 0;
 }
