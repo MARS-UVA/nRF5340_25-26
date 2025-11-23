@@ -39,7 +39,7 @@ void configure_can_device(const struct device *dev)
     LOG_INF("CAN device %s configured.", dev->name);
 }
 
-void send_can_message(const struct device *dev, int identifier, char *message, uint8_t length)
+void send_can_message(const struct device *dev, uint32_t identifier, char *message, uint8_t length)
 {
     struct can_frame frame = {
         .flags = CAN_FRAME_IDE,
@@ -67,13 +67,13 @@ void _rx_callback(const struct device *dev, struct can_frame *frame, void *user_
     LOG_INF("TODO: Do something with can message (recvd btw)");
 }
 
-int can_receive_async(const struct device *dev, int identifier)
+int can_receive_async(const struct device *dev, uint32_t identifier)
 {
     LOG_INF("Setting up can receive, id %d", identifier);
     const struct can_filter filter = {
-        .flags = 0U,
+        .flags = CAN_FILTER_IDE,
         .id = identifier,
-        .mask = CAN_STD_ID_MASK,
+        .mask = CAN_EXT_ID_MASK,
     };
 
     void *user_data_for_callback_fn = NULL;
