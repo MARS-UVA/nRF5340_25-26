@@ -63,11 +63,12 @@ void _rx_callback(const struct device *dev, struct can_frame *frame, void *user_
     /* !!! n.b. "The callback function is called from an interrupt context,
      *           which means that the callback function should be as short
      *           as possible and must not block." !!!
+     * TODO: Implement actual functionality here
      */
-    LOG_INF("TODO: Do something with can message (recvd btw)");
+    LOG_INF("Recieved CAN message (%d bytes): \"%s\"", frame->dlc, frame->data);
 }
 
-int can_receive_async(const struct device *dev, uint32_t identifier)
+int can_start_receiving(const struct device *dev, uint32_t identifier)
 {
     LOG_INF("Setting up can receive, id %d", identifier);
     const struct can_filter filter = {
@@ -87,7 +88,7 @@ int can_receive_async(const struct device *dev, uint32_t identifier)
     return filter_id;
 }
 
-void stop_receiving(const struct device *dev, int filter_id)
+void can_stop_receiving(const struct device *dev, int filter_id)
 {
     can_remove_rx_filter(dev, filter_id);
 }

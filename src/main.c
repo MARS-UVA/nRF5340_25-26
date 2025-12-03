@@ -74,7 +74,7 @@ int main(void)
         char* message = "hi\0";
         int msg_len = 3;
         
-        can_receive_async(dev_can, id);
+        can_start_receiving(dev_can, id);
 
         LOG_INF("Devices initialized. Entering main loop.");
 
@@ -86,7 +86,7 @@ int main(void)
                 k_msleep(1000);
         }
         
-        stop_receiving(dev_can, id);
+        can_stop_receiving(dev_can, id);
 
         return 0;
 }
