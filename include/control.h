@@ -3,7 +3,7 @@
 #ifndef CONTROL_H_
 #define CONTROL_H_
 
-#define CONTROL_TIMEOUT_MS 50
+#define CONTROL_TIMEOUT_MS 80
 
 // Define CAN IDs of each motor/actuator
 #define FRONT_LEFT_WHEEL_ID 36
