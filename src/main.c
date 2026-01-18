@@ -148,12 +148,13 @@ int main(void)
 {
         k_msleep(10);
 
-        configure_can_device(dev_can);
-        initialize_talons(dev_can);
-
         // configure_uart_device(dev_uart, &serial_msgq);
         configure_wifi();
         k_sem_give(&wifi_init_sem);
+
+        k_sleep(K_SECONDS(1));
+        configure_can_device(dev_can);
+        initialize_talons(dev_can);
 
         LOG_INF("Devices initialized. Entering main loop.");
 
