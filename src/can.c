@@ -58,28 +58,45 @@ void send_can_message(const struct device *dev, uint32_t identifier, char *messa
     }
 }
 
-void _rx_callback(const struct device *dev, struct can_frame *frame, void *user_data)
-{
-    /* !!! n.b. "The callback function is called from an interrupt context,
-     *           which means that the callback function should be as short
-     *           as possible and must not block." !!!
-     * TODO: Implement actual functionality here
-     */
-    LOG_INF("Recieved CAN message (%d bytes): \"%s\"", frame->dlc, frame->data);
-}
+// void _rx_callback(const struct device *dev, struct can_frame *frame, void *user_data)
+// {
+//     /* !!! n.b. "The callback function is called from an interrupt context,
+//      *           which means that the callback function should be as short
+//      *           as possible and must not block." !!!
+//      */
+//     LOG_INF("Recieved CAN message (%d bytes): \"%s\"", frame->dlc, frame->data);
+// }
 
-int can_start_receiving(const struct device *dev, uint32_t identifier)
+int can_start_receiving_msgq(const struct device *dev, struct k_msgq *message_queue, uint32_t identifier)
 {
-    LOG_INF("Setting up can receive, id %d", identifier);
+    LOG_INF("Setting up CAN receive, id %d", identifier);
     const struct can_filter filter = {
         .flags = CAN_FILTER_IDE,
         .id = identifier,
         .mask = CAN_EXT_ID_MASK,
     };
 
-    void *user_data_for_callback_fn = NULL;
+    // NOTE: If the queue is full, recieved frames are silently dropped.
+    // If we want different behavior, reimplement with can_add_rx_filter() and k_msgq_put() in the callback
+    int filter_id = can_add_rx_filter_msgq(dev, message_queue, &filter);
 
-    int filter_id = can_add_rx_filter(dev, _rx_callback, user_data_for_callback_fn, &filter);
+    if (filter_id < 0)
+    {
+        LOG_ERR("Unable to add rx filter [%d]", filter_id);
+    }
+    return filter_id;
+}
+
+int can_start_receiving_callback(const struct device *dev, can_rx_callback_t callback_fn, void *callback_args, uint32_t identifier)
+{
+    LOG_INF("Setting up CAN receive, id %d", identifier);
+    const struct can_filter filter = {
+        .flags = CAN_FILTER_IDE,
+        .id = identifier,
+        .mask = CAN_EXT_ID_MASK,
+    };
+
+    int filter_id = can_add_rx_filter(dev, callback_fn, callback_args, &filter);
 
     if (filter_id < 0)
     {
