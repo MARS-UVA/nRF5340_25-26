@@ -1,6 +1,7 @@
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
 #include "can.h"
+#include "pdp.h"
 #include "talon_fx.h"
 #include "talon_srx.h"
 #include "control.h"
@@ -20,6 +21,36 @@ K_MSGQ_DEFINE(serial_msgq, sizeof(serial_packet_t), 4, 4);
 
 talon_fx_t motor;
 talon_srx_t actuator;
+
+K_SEM_DEFINE(can_init_sem, 0, 1);
+
+void can_thread(void)
+{
+        k_sem_take(&can_init_sem, K_FOREVER);
+
+        PDP pdp;
+        int pdp_id = 62;
+        pdp_init(&pdp, dev_can, pdp_id);
+
+        while (true)
+        {
+                pdp_update_channel_currents(&pdp);
+
+                k_sem_take(&pdp.callback00.received, K_MSEC(500));
+                k_sem_take(&pdp.callback40.received, K_MSEC(50));
+                k_sem_take(&pdp.callback80.received, K_MSEC(50));
+
+                for (int i = 0; i <= 15; i++)
+                {
+                        LOG_INF("Ch. %02d current: %2.3f", i, pdp_get_channel_current(&pdp, i));
+                }
+                LOG_INF("Bus voltage: %2.3f", pdp_get_bus_voltage(&pdp));
+
+                k_msleep(1000);
+        }
+}
+
+K_THREAD_DEFINE(can_thread_id, 4096, can_thread, NULL, NULL, NULL, CAN_THREAD_PRIORITY, 0, 0);
 
 int control_thread(void)
 {
@@ -59,7 +90,7 @@ int control_thread(void)
         return 0;
 }
 
-// K_THREAD_DEFINE(control_thread_id, STACK_SIZE, control_thread, NULL, NULL, NULL, CONTROL_THREAD_PRIORITY, 0, 0);
+K_THREAD_DEFINE(control_thread_id, STACK_SIZE, control_thread, NULL, NULL, NULL, CONTROL_THREAD_PRIORITY, 0, 0);
 
 int main(void)
 {
@@ -67,26 +98,17 @@ int main(void)
 
         configure_can_device(dev_can);
         configure_uart_device(dev_uart, &serial_msgq);
-
         initialize_talons(dev_can);
-        
-        int id = 123;
-        char* message = "hi\0";
-        int msg_len = 3;
-        
-        can_start_receiving(dev_can, id);
+
+        k_sem_give(&can_init_sem);
 
         LOG_INF("Devices initialized. Entering main loop.");
 
         while (1)
         {
                 LOG_INF("Heartbeat");
-                send_can_message(dev_can, id, message, msg_len);
-                LOG_INF("Sent can message: \"%s\"", message);
                 k_msleep(1000);
         }
-        
-        can_stop_receiving(dev_can, id);
 
         return 0;
 }
