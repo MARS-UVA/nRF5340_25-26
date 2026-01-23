@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <zephyr/drivers/uart.h>
 
 #ifndef SERIAL_H_
 #define SERIAL_H_

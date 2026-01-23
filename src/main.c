@@ -40,13 +40,33 @@ void can_thread(void)
                 k_sem_take(&pdp.callback40.received, K_MSEC(50));
                 k_sem_take(&pdp.callback80.received, K_MSEC(50));
 
-                for (int i = 0; i <= 15; i++)
-                {
-                        LOG_INF("Ch. %02d current: %2.3f", i, pdp_get_channel_current(&pdp, i));
-                }
-                LOG_INF("Bus voltage: %2.3f", pdp_get_bus_voltage(&pdp));
+                float feedback_voltages[] = {
+                    pdp_get_channel_current(&pdp, FRONT_LEFT_WHEEL_PDP_ID),
+                    pdp_get_channel_current(&pdp, BACK_LEFT_WHEEL_PDP_ID),
+                    pdp_get_channel_current(&pdp, FRONT_RIGHT_WHEEL_PDP_ID),
+                    pdp_get_channel_current(&pdp, BACK_RIGHT_WHEEL_PDP_ID),
+                    pdp_get_channel_current(&pdp, BUCKET_DRUM_LEFT_PDP_ID),
+                    pdp_get_channel_current(&pdp, BUCKET_DRUM_PDP_ID),
+                    pdp_get_channel_current(&pdp, LEFT_ACTUATOR_PDP_ID),
+                    pdp_get_channel_current(&pdp, RIGHT_ACTUATOR_PDP_ID),
+                    pdp_get_bus_voltage(&pdp),
+                };
 
-                k_msleep(1000);
+                LOG_INF("PDP Voltages - FL: %.2f, BL: %.2f, FR: %.2f, BR: %.2f, DL: %.2f, D: %.2f, LA: %.2f, RA: %.2f, Bus: %.2f",
+                        (double)feedback_voltages[0],
+                        (double)feedback_voltages[1],
+                        (double)feedback_voltages[2],
+                        (double)feedback_voltages[3],
+                        (double)feedback_voltages[4],
+                        (double)feedback_voltages[5],
+                        (double)feedback_voltages[6],
+                        (double)feedback_voltages[7],
+                        (double)feedback_voltages[8]);
+
+                uint8_t packet[sizeof(feedback_voltages) + 4] = {0};
+                packet[0] = 0x01;
+                memcpy(&packet[4], feedback_voltages, sizeof(feedback_voltages));
+                uart_tx(dev_uart, packet, sizeof(packet), SYS_FOREVER_MS);
         }
 }
 
@@ -76,7 +96,7 @@ int control_thread(void)
                         };
                 }
 
-                LOG_DBG("Packet - FL: %d, BL: %d, FR: %d, BR: %d, Drum: %d, Actuator: %d",
+                LOG_INF("Packet - FL: %d, BL: %d, FR: %d, BR: %d, Drum: %d, Actuator: %d",
                         pkt.front_left_wheel,
                         pkt.back_left_wheel,
                         pkt.front_right_wheel,
